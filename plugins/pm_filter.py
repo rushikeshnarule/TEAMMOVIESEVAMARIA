@@ -135,7 +135,7 @@ async def advantage_spoll_choker(bot, query):
             k = (movie, files, offset, total_results)
             await auto_filter(bot, query, k)
         else:
-            k = await query.message.edit('This Movie Not Found In DataBase If You Want This Movie Join Our Request Group And Request - https://t.me/+BDvuprV0ctVkOTE1')
+            k = await query.message.edit('This Movie Not Found In DataBase If You Want This Movie Join Our Request Group And Request - https://t.me/+L8QEURO3mCU2MzM9')
             await asyncio.sleep(10)
             await k.delete()
 
@@ -407,7 +407,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('➕ Add Me To Your Groups ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
         ], [
             InlineKeyboardButton('➡️Channel', url='https://t.me/TeamMoviesNetwork'),
-            InlineKeyboardButton('🤖 Updates', url='https://t.me/teammoviesupdates')
+            InlineKeyboardButton('🤖 Updates', url='https://t.me/+CJWJUodrLiYxYWZl')
         ], [
             InlineKeyboardButton('ℹ️ Help', callback_data='help'),
             InlineKeyboardButton('😊 About', callback_data='about')
@@ -438,8 +438,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
         )
     elif query.data == "about":
         buttons = [[
-            InlineKeyboardButton('🤖 Updates', url='https://t.me/teammoviesupdates'),
-            InlineKeyboardButton('♥️ Source', url='https://t.me/teammoviesupdates')
+            InlineKeyboardButton('🤖 Updates', url='https://t.me/+CJWJUodrLiYxYWZl'),
+            InlineKeyboardButton('♥️ Source', url='https://t.me/+CJWJUodrLiYxYWZl')
         ], [
             InlineKeyboardButton('🏠 Home', callback_data='start'),
             InlineKeyboardButton('🔐 Close', callback_data='close_data')
@@ -675,7 +675,7 @@ async def auto_filter(client, msg, spoll=False):
              )
 
     btn.append([
-                InlineKeyboardButton("🤔 How To Download ", url=f"https://t.me/HowToDownloadorwatch/2"),
+                InlineKeyboardButton("🤔 How To Download ", url=f"https://t.me/HowToDownloadorwatch/11"),
             ])
         
     imdb = await get_poster(search, file=(files[0]).file_name) if settings["imdb"] else None
@@ -743,7 +743,7 @@ async def advantage_spell_chok(msg):
     g_s += await search_gagala(msg.text)
     gs_parsed = []
     if not g_s:
-        k = await msg.reply("I couldn't find any movie in that name. If You Want Tis Movi e Request Us at - https://t.me/+BDvuprV0ctVkOTE1")
+        k = await msg.reply("I couldn't find any movie in that name. If You Want This Movi e Request Us at - https://t.me/+L8QEURO3mCU2MzM9")
         await asyncio.sleep(8)
         await k.delete()
         return
