@@ -1,9 +1,12 @@
 import os
 from pyrogram import Client, filters, enums
 from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant, MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
+from Script import script
 from info import IMDB_TEMPLATE
+from info import PICS
 from utils import extract_user, get_file_id, get_poster, last_online
 import time
+import random
 from datetime import datetime
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 import logging
