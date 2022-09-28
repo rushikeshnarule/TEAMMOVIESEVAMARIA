@@ -1,4 +1,4 @@
-# Kanged From @TroJanZheX
+
 import asyncio
 import re
 import ast
@@ -26,17 +26,82 @@ import logging
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.ERROR)
 
+
+
 BUTTONS = {}
 SPELL_CHECK = {}
+FILTER_MODE = {}
 
+@Client.on_message(filters.command('autofilter'))
+async def fil_mod(client, message): 
+      mode_on = ["yes", "on", "true"]
+      mode_of = ["no", "off", "false"]
 
-@Client.on_message(filters.group & filters.text & filters.incoming)
-async def give_filter(client, message):
-    k = await manual_filters(client, message)
-    if k == False:
-        await auto_filter(client, message) 
+      try: 
+         args = message.text.split(None, 1)[1].lower() 
+      except: 
+         return await message.reply("**𝙸𝙽𝙲𝙾𝙼𝙿𝙻𝙴𝚃𝙴 𝙲𝙾𝙼𝙼𝙰𝙽𝙳...**")
+      
+      m = await message.reply("**𝚂𝙴𝚃𝚃𝙸𝙽𝙶.../**")
 
+      if args in mode_on:
+          FILTER_MODE[str(message.chat.id)] = "True" 
+          await m.edit("**𝙰𝚄𝚃𝙾𝙵𝙸𝙻𝚃𝙴𝚁 𝙴𝙽𝙰𝙱𝙻𝙴𝙳**")
+      
+      elif args in mode_of:
+          FILTER_MODE[str(message.chat.id)] = "False"
+          await m.edit("**𝙰𝚄𝚃𝙾𝙵𝙸𝙻𝚃𝙴𝚁 𝙳𝙸𝚂𝙰𝙱𝙻𝙴𝙳**")
+      else:
+          await m.edit("𝚄𝚂𝙴 :- /autofilter on 𝙾𝚁 /autofilter off")
+            
+      
+@Client.on_message(filters.group | filters.private & filters.text & filters.incoming)
+async def give_filter(client,message):
+    group_id = message.chat.id
+    name = message.text
 
+    keywords = await get_filters(group_id)
+    for keyword in reversed(sorted(keywords, key=len)):
+        pattern = r"( |^|[^\w])" + re.escape(keyword) + r"( |$|[^\w])"
+        if re.search(pattern, name, flags=re.IGNORECASE):
+            reply_text, btn, alert, fileid = await find_filter(group_id, keyword)
+
+            if reply_text:
+                reply_text = reply_text.replace("\\n", "\n").replace("\\t", "\t")
+
+            if btn is not None:
+                try:
+                    if fileid == "None":
+                        if btn == "[]":
+                            await message.reply_text(reply_text, disable_web_page_preview=True)
+                        else:
+                            button = eval(btn)
+                            await message.reply_text(
+                                reply_text,
+                                disable_web_page_preview=True,
+                                reply_markup=InlineKeyboardMarkup(button)
+                            )
+                    elif btn == "[]":
+                        await message.reply_cached_media(
+                            fileid,
+                            caption=reply_text or ""
+                        )
+                    else:
+                        button = eval(btn) 
+                        await message.reply_cached_media(
+                            fileid,
+                            caption=reply_text or "",
+                            reply_markup=InlineKeyboardMarkup(button)
+                        )
+                except Exception as e:
+                    print(e)
+                break 
+
+    else:
+        if FILTER_MODE.get(str(message.chat.id)) == "False":
+            return
+        else:
+            await auto_filter(client, message)   
 
 
 @Client.on_callback_query(filters.regex(r"^next"))
@@ -137,7 +202,7 @@ async def advantage_spoll_choker(bot, query):
             k = (movie, files, offset, total_results)
             await auto_filter(bot, query, k)
         else:
-            k = await query.message.edit('This Movie Not Found In DataBase If You Want This Movie Join Our Request Group And Request - https://t.me/+L8QEURO3mCU2MzM9')
+            k = await query.message.edit('This Movie Not Found In DataBase If You Want This Movie Join Our Request Group And Request - https://t.me/+BDvuprV0ctVkOTE1')
             await asyncio.sleep(10)
             await k.delete()
 
@@ -675,20 +740,18 @@ async def auto_filter(client, msg, spoll=False):
         btn.append(
             [InlineKeyboardButton(text="🗓 1/1", callback_data="pages")]
              )
-        
-        
-      btn.append([
-                InlineKeyboardButton(" YouTube Channel ", url=f"https://youtube.com/channel/UCr9dKjtvbLz4aMgsd_bYLtg"),
-            ])
-       
-     btn.append([
-                InlineKeyboardButton("Roast On Cringe Reel Girl", url=f"https://www.youtube.com/watch?v=ECaqwn4W3Gg&t"),
-            ])
-    
-     btn.append([
+
+    btn.append([
                 InlineKeyboardButton("🤔 How To Download ", url=f"https://telegram.me/DTG_TV/60"),
             ])
     
+    btn.append([
+                InlineKeyboardButton("Roast On Insta Reel Girl", url=f"https://www.youtube.com/watch?v=ECaqwn4W3Gg&t"),
+            ])
+    
+     btn.append([
+                InlineKeyboardButton("YouTube Channel", url=f"https://www.youtube.com/channel/UCr9dKjtvbLz4aMgsd_bYLtg"),
+            ])
         
     imdb = await get_poster(search, file=(files[0]).file_name) if settings["imdb"] else None
     TEMPLATE = settings['template']
@@ -755,7 +818,7 @@ async def advantage_spell_chok(msg):
     g_s += await search_gagala(msg.text)
     gs_parsed = []
     if not g_s:
-        k = await msg.reply("I couldn't find any movie in that name. If You Want This Movi e Request Us at - https://t.me/+L8QEURO3mCU2MzM9")
+        k = await msg.reply("I couldn't find any movie in that name. If You Want Tis Movi e Request Us at - https://t.me/all_movie_search_bot")
         await asyncio.sleep(8)
         await k.delete()
         return
