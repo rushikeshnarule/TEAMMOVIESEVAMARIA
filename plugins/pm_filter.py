@@ -406,8 +406,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
         buttons = [[
             InlineKeyboardButton('➕ Add Me To Your Groups ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
         ], [
-            InlineKeyboardButton('➡️Channel', url='https://t.me/TeamMoviesNetwork'),
-            InlineKeyboardButton('🤖 Updates', url='https://t.me/+CJWJUodrLiYxYWZl')
+            InlineKeyboardButton('➡️Channel', url='https://t.me/moviesaddabxs'),
+            InlineKeyboardButton('🤖 Updates', url='https://t.me/DTG_TV')
         ], [
             InlineKeyboardButton('ℹ️ Help', callback_data='help'),
             InlineKeyboardButton('😊 About', callback_data='about')
@@ -438,8 +438,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
         )
     elif query.data == "about":
         buttons = [[
-            InlineKeyboardButton('🤖 Updates', url='https://t.me/+CJWJUodrLiYxYWZl'),
-            InlineKeyboardButton('♥️ Source', url='https://t.me/+CJWJUodrLiYxYWZl')
+            InlineKeyboardButton('🤖 Updates', url='https://t.me/moviesaddabxs'),
+            InlineKeyboardButton('♥️ Source', url='https://t.me/moviesaddabxs')
         ], [
             InlineKeyboardButton('🏠 Home', callback_data='start'),
             InlineKeyboardButton('🔐 Close', callback_data='close_data')
@@ -673,10 +673,20 @@ async def auto_filter(client, msg, spoll=False):
         btn.append(
             [InlineKeyboardButton(text="🗓 1/1", callback_data="pages")]
              )
-
-    btn.append([
-                InlineKeyboardButton("🤔 How To Download ", url=f"https://t.me/HowToDownloadorwatch/11"),
+        
+        
+      btn.append([
+                InlineKeyboardButton(" YouTube Channel ", url=f"https://youtube.com/channel/UCr9dKjtvbLz4aMgsd_bYLtg"),
             ])
+       
+     btn.append([
+                InlineKeyboardButton("Roast On Cringe Reel Girl", url=f"https://www.youtube.com/watch?v=ECaqwn4W3Gg&t"),
+            ])
+    
+     btn.append([
+                InlineKeyboardButton("🤔 How To Download ", url=f"https://telegram.me/DTG_TV/60"),
+            ])
+    
         
     imdb = await get_poster(search, file=(files[0]).file_name) if settings["imdb"] else None
     TEMPLATE = settings['template']
