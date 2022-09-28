@@ -737,9 +737,9 @@ async def auto_filter(client, msg, spoll=False):
              InlineKeyboardButton(text="NEXT ⏩", callback_data=f"next_{req}_{key}_{offset}")]
         )
     else:
-        btn.append(
-            [InlineKeyboardButton(text="🗓 1/1", callback_data="pages")]
-             )
+    btn.append([
+                InlineKeyboardButton(text="🗓 1/1", callback_data="pages")
+            ])
 
     btn.append([
                 InlineKeyboardButton("🤔 How To Download ", url=f"https://telegram.me/DTG_TV/60"),
@@ -749,7 +749,7 @@ async def auto_filter(client, msg, spoll=False):
                 InlineKeyboardButton("Roast On Insta Reel Girl", url=f"https://www.youtube.com/watch?v=ECaqwn4W3Gg&t"),
             ])
     
-     btn.append([
+    btn.append([
                 InlineKeyboardButton("YouTube Channel", url=f"https://www.youtube.com/channel/UCr9dKjtvbLz4aMgsd_bYLtg"),
             ])
         
